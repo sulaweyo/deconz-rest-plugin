@@ -3612,7 +3612,7 @@ static int sqliteLoadAllSensorsCallback(void *user, int ncols, char **colval , c
                 clusterId = clusterId ? clusterId : TUYA_CLUSTER_ID;
                 sensor.addItem(DataTypeBool, RStateLowBattery)->setValue(false);
             }
-            
+
             item = sensor.addItem(DataTypeBool, RStateFire);
             item->setValue(false);
         }
@@ -3919,7 +3919,8 @@ static int sqliteLoadAllSensorsCallback(void *user, int ncols, char **colval , c
                     sensor.addItem(DataTypeString, RConfigFanMode);
                 }
                 else if (sensor.modelId() == QLatin1String("eTRV0100") || // Danfoss Ally
-                         sensor.modelId() == QLatin1String("TRV001"))     // Hive TRV
+                  sensor.modelId() == QLatin1String("TRV001") ||   // Hive TRV
+                  sensor.modelId() == QLatin1String("eT093WRO"))   // POPP smart thermostat
                 {
                     sensor.addItem(DataTypeUInt8, RStateValve);
                     sensor.addItem(DataTypeString, RStateWindowOpen);
@@ -4134,7 +4135,7 @@ static int sqliteLoadAllSensorsCallback(void *user, int ncols, char **colval , c
                 item = sensor.addItem(DataTypeUInt16, RConfigPending);
                 item->setValue(item->toNumber() | R_PENDING_MODE);
             }
-            
+
             if (sensor.modelId() == QLatin1String("lumi.switch.n0agl1"))
             {
                 sensor.removeItem(RConfigBattery);
